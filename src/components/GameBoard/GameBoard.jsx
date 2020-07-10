@@ -1,22 +1,12 @@
 import React, { useState } from "react";
 import Squares from "../Squares";
+import { initialState, getWinner } from "utils";
 import styles from "./GameBoard.module.scss";
-
-const initialState = [
-  { id: 0, value: "" },
-  { id: 1, value: "" },
-  { id: 2, value: "" },
-  { id: 3, value: "" },
-  { id: 4, value: "" },
-  { id: 5, value: "" },
-  { id: 6, value: "" },
-  { id: 7, value: "" },
-  { id: 8, value: "" },
-];
 
 const GameBoard = () => {
   const [boxes, setBoxes] = useState(initialState);
   const [isNext, setIsNext] = useState(false);
+  const winner = getWinner(boxes);
 
   const onSquareClick = (id) => {
     const boxesCopy = [...boxes];
@@ -40,9 +30,10 @@ const GameBoard = () => {
     setBoxes(updatesBoxes);
     setIsNext(false);
   };
+
   return (
     <div className={styles.gameBoard}>
-      <div className={styles.winner}>Winner: </div>
+      <div className={styles.winner}>Winner: {winner}</div>
       <div className={styles.nextPlayer}>Next player: {isNext ? "O" : "X"}</div>
       <div className={styles.buttonContainer}>
         <button className={styles.button} onClick={resetStartAgain}>
