@@ -1,4 +1,4 @@
-export const getWinner = () => {
+export const getWinner = (boxes) => {
   const list = [
     [0, 1, 2],
     [3, 4, 5],
@@ -9,6 +9,18 @@ export const getWinner = () => {
     [0, 4, 8],
     [2, 4, 6],
   ];
+  let winner;
+  list.forEach((values) => {
+    const [a, b, c] = values;
+    if (
+      boxes[a].value &&
+      boxes[a].value === boxes[b].value &&
+      boxes[a].value === boxes[c].value
+    ) {
+      winner = boxes[a].value;
+    }
+  });
+  return winner;
 };
 
 export const initialState = [

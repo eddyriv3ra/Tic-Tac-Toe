@@ -9,16 +9,18 @@ const GameBoard = () => {
   const winner = getWinner(boxes);
 
   const onSquareClick = (id) => {
-    const boxesCopy = [...boxes];
-    const updatesBoxes = boxesCopy.map((box) => {
-      if (box.id === id) {
-        const value = (box.value = !isNext ? "X" : "O");
-        return { ...box, value };
-      }
-      return box;
-    });
-    setBoxes(updatesBoxes);
-    setIsNext(!isNext);
+    if (!winner) {
+      const boxesCopy = [...boxes];
+      const updatesBoxes = boxesCopy.map((box) => {
+        if (box.id === id) {
+          const value = (box.value = !isNext ? "X" : "O");
+          return { ...box, value };
+        }
+        return box;
+      });
+      setBoxes(updatesBoxes);
+      setIsNext(!isNext);
+    }
   };
 
   const resetStartAgain = () => {
